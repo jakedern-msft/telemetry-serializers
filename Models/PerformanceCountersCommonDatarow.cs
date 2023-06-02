@@ -8,7 +8,7 @@ namespace Models;
 /// <summary>
 /// The dataset for the sqlmi performance counters common monitoring target.
 /// </summary>
-internal sealed class PerformanceCountersCommonDatarow: Avro.Specific.ISpecificRecord
+internal sealed class PerformanceCountersCommonDatarow : Avro.Specific.ISpecificRecord
 {
 #nullable enable // Justification = System.String? needs to be nullable; i.e. parity with db results.
 
@@ -84,11 +84,11 @@ internal sealed class PerformanceCountersCommonDatarow: Avro.Specific.ISpecificR
 
 #nullable restore // Justification = System.String? needs to be nullable; i.e. parity with db results.
 
-   /// <summary>
-   /// JSON String representation of the avro schema for this data row.
-   /// <summary>
-   [JsonIgnore]
-   internal const string AvroSchemaString = @"
+    /// <summary>
+    /// JSON String representation of the avro schema for this data row.
+    /// <summary>
+    [JsonIgnore]
+    internal const string AvroSchemaString = @"
    {
        ""type"": ""record"",
        ""name"": ""PerformanceCountersCommonDatarow"",
@@ -180,17 +180,17 @@ internal sealed class PerformanceCountersCommonDatarow: Avro.Specific.ISpecificR
        ]
    }";
 
-   /// <summary>
-   /// Parsed schema object for this data row.
-   /// <summary>
-   [JsonIgnore]
-   private static readonly Schema _schema = Schema.Parse(PerformanceCountersCommonDatarow.AvroSchemaString);
+    /// <summary>
+    /// Parsed schema object for this data row.
+    /// <summary>
+    [JsonIgnore]
+    private static readonly Schema _schema = Schema.Parse(PerformanceCountersCommonDatarow.AvroSchemaString);
 
-   /// <summary>
-   /// Public schema object.
-   /// <summary>
-   [JsonIgnore]
-   public Schema Schema => PerformanceCountersCommonDatarow._schema;
+    /// <summary>
+    /// Public schema object.
+    /// <summary>
+    [JsonIgnore]
+    public Schema Schema => PerformanceCountersCommonDatarow._schema;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="PerformanceCountersCommonDatarow"/> class.
@@ -228,32 +228,49 @@ internal sealed class PerformanceCountersCommonDatarow: Avro.Specific.ISpecificR
         this.CntrValue = cntrValue;
         this.CntrType = cntrType;
     }
-   /// <inheritdoc />
-   public object Get(int fieldPos)
-   {
+    /// <inheritdoc />
+    public object Get(int fieldPos)
+    {
 #pragma warning disable CS8603 // Justification = Fields on this class are nullable and we do not control this interface
-       return fieldPos switch
-       {
-           0 => this.SampleTimeUtc,
-           1 => this.ManagedInstanceName,
-           2 => this.ReplicaType,
-           3 => this.ObjectName,
-           4 => this.CounterName,
-           5 => this.InstanceName,
-           6 => this.DatabaseID,
-           7 => this.DatabaseName,
-           8 => this.CntrValue,
-           9 => this.CntrType,
-           _ => throw new AvroRuntimeException("Bad index " + fieldPos)
-       };
+        return fieldPos switch
+        {
+            0 => this.SampleTimeUtc,
+            1 => this.ManagedInstanceName,
+            2 => this.ReplicaType,
+            3 => this.ObjectName,
+            4 => this.CounterName,
+            5 => this.InstanceName,
+            6 => this.DatabaseID,
+            7 => this.DatabaseName,
+            8 => this.CntrValue,
+            9 => this.CntrType,
+            _ => throw new AvroRuntimeException("Bad index " + fieldPos)
+        };
 #pragma warning restore CS8603 // Justification = Fields on this class are nullable and we do not control this interface
-   }
+    }
 
-   /// <inheritdoc />
-   public void Put(int fieldPos, object fieldValue)
-   {
-       // This method is only required for de-serializing avro messages. Since
-       // this application is purely a data producer, we have no need.
-       throw new NotImplementedException();
-   }
+    /// <inheritdoc />
+    public void Put(int fieldPos, object fieldValue)
+    {
+        // This method is only required for de-serializing avro messages. Since
+        // this application is purely a data producer, we have no need.
+        throw new NotImplementedException();
+    }
+
+    public PerformanceCountersCommonDatarow Generate()
+    {
+        return new PerformanceCountersCommonDatarow
+        (
+            sampleTimeUtc: System.DateTime.UtcNow,
+            managedInstanceName: "managedInstanceName",
+            replicaType: "replicaType",
+            objectName: "objectName",
+            counterName: "counterName",
+            instanceName: "instanceName",
+            databaseID: 1,
+            databaseName: "databaseName",
+            cntrValue: 1.0,
+            cntrType: 1
+        );
+    }
 }
