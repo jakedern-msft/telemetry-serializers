@@ -1251,7 +1251,7 @@ internal sealed class ActiveSessionsDatarow: Avro.Specific.ISpecificRecord
        throw new NotImplementedException();
    }
  
-    public ActiveSessionsDatarow Generate()
+    public static ActiveSessionsDatarow Generate()
     {
         return new ActiveSessionsDatarow
         (

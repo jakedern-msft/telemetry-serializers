@@ -4,6 +4,8 @@ using Avro.IO;
 using Avro.Reflect;
 using Avro.Specific;
 
+namespace Serializers;
+
 internal class Serialize
 {
     public static async Task<Stream> ToJsonAsync(object o, CancellationToken cancelToken)

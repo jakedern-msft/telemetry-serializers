@@ -257,7 +257,7 @@ internal sealed class PerformanceCountersCommonDatarow : Avro.Specific.ISpecific
         throw new NotImplementedException();
     }
 
-    public PerformanceCountersCommonDatarow Generate()
+    public static PerformanceCountersCommonDatarow Generate()
     {
         return new PerformanceCountersCommonDatarow
         (
